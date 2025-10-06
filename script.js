@@ -12,7 +12,12 @@ function render (html) {
      - Output all foods into the #out div (as <p> tags or list items)
 */
 function listFoods () {
-  // code goes here
+  let output = ''
+  for (const foodItem of foods){
+    output += `<p>${foodItem}`
+  }
+
+  render (output)
 }
 
 /* 
@@ -21,7 +26,15 @@ function listFoods () {
      - Output foods as an ordered list (<ol><li>...</li></ol>)
 */
 function numberedFoods () {
-  // code goes here
+let output = `<ol class="list-group list-group-numbered">`
+
+for (let i = 0; i < foods.length; i++){
+  output += `<li class="list-group-item">${foods[i]}</li>`
+}
+
+output += `<ol>`
+
+render (output)
 }
 
 /* 
@@ -32,24 +45,31 @@ function numberedFoods () {
      - If no matches, display a "not found" message
 */
 function filterFoods () {
-  // code goes here
-}
+  const letter = prompt('Pick a letter to filter the list by:')
 
-/* 
-  4) forEachFoods()
-     - Use foods.forEach()
-     - Output each food as a Bootstrap card
-     - Cards should be placed in a centered row
-*/
-function forEachFoods () {
-  // code goes here
+  if (!letter) {
+    render ('<p>ANSWER THE PROMPT JACKASS<p>')
+    return
+  }
+
+  const lower = letter.toLowerCase()
+  const matches = foods.filter(f => f.toLowerCase().startsWith(lower))
+
+  const list = matches.map(f => `<li class="list-group-item">${f}</li>`).join('')
+
+  if (matches.length === 0){
+    render ('<p>NONE WORK GUMBO<p>')
+    return
+  }
+
+  render(`<ul class="list-group">${list}</ul>`)
 }
 
 // ---- Event listeners (buttons) ----
 document.getElementById('btnList').addEventListener('click', listFoods)
 document.getElementById('btnNums').addEventListener('click', numberedFoods)
 document.getElementById('btnFilter').addEventListener('click', filterFoods)
-document.getElementById('btnForEach').addEventListener('click', forEachFoods)
+
 
 //  ---------------STUDENT WORK SECTION--------------
 
@@ -60,7 +80,9 @@ document.getElementById('btnForEach').addEventListener('click', forEachFoods)
   - Display the results as an unordered list (<ul>)
 */
 function uppercaseList () {
-  // TODO: Write your code here
+  
+
+
 }
 
 /* 
@@ -70,7 +92,7 @@ function uppercaseList () {
   - You may use a backwards loop OR the built-in .reverse()
 */
 function reverseList () {
-  // TODO: Write your code here
+
 }
 
 /* 
@@ -80,7 +102,7 @@ function reverseList () {
   - Display it in a Bootstrap card with a heading like "Today's Pick"
 */
 function randomFoodPicker () {
-  // TODO: Write your code here
+
 }
 
 /* 
@@ -91,7 +113,7 @@ function randomFoodPicker () {
   - Display results in the format: Food — X letters
 */
 function wordLengths () {
-  // TODO: Write your code here
+
 }
 
 // ---- Event listeners for the new buttons ----
