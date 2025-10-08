@@ -129,7 +129,12 @@ function randomFoodPicker () {
   - Display results in the format: Food — X letters
 */
 function wordLengths () {
-  
+    const listItems = foods.map(f => {
+    const length = f.length
+    return `<li class="list-group-item">${f} — ${length} letters</li>`
+  }).join('')
+
+  render(`<ul class="list-group">${listItems}</ul>`)
 }
 
 // ---- Event listeners for the new buttons ----
